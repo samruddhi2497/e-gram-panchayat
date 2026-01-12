@@ -1,0 +1,46 @@
+/* src/components/Style/Auth.css */
+.auth-container {
+  width: 100%;
+  max-width: 400px;
+  padding: 40px;
+  border-radius: 12px;
+  background: #ffffff;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.auth-container h2 {
+  text-align: center;
+  margin-bottom: 24px;
+  color: #0f172a;
+}
+
+.auth-container form,
+.auth-container .ant-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.auth-container input,
+.auth-container select,
+.auth-container .ant-input {
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #cbd5e1;
+  width: 100%;
+}
+
+.auth-container button,
+.auth-container .ant-btn {
+  padding: 12px;
+  background: #f97316;
+  color: white;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+}
+
+.auth-container button:hover,
+.auth-container .ant-btn:hover {
+  background: #ea580c !important;
+}

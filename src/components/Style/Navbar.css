@@ -1,0 +1,80 @@
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #0f172a;
+  padding: 0 40px;
+  height: 70px;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+/* LOGO */
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+}
+
+.logo img {
+  height: 44px;
+}
+
+.logo span {
+  color: #ffffff;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+/* MENU */
+.nav-menu {
+  background: transparent !important;
+  border-bottom: none;
+}
+
+.nav-menu .ant-menu-item {
+  color: #e5e7eb !important;
+  font-weight: 500;
+}
+
+.nav-menu .ant-menu-item-selected {
+  background: transparent !important;
+  color: #f97316 !important;
+  font-weight: 600;
+}
+
+.nav-menu .ant-menu-item:hover {
+  color: #f97316 !important;
+}
+
+/* RIGHT ACTIONS */
+.right-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* LANGUAGE BUTTON */
+.lang-btn {
+  background: transparent;
+  border: 1px solid #334155;
+  color: #e5e7eb;
+}
+
+.lang-btn:hover {
+  border-color: #f97316;
+  color: #f97316;
+}
+
+/* LOGIN BUTTON */
+.login-btn {
+  background: #f97316;
+  border: none;
+  font-weight: 600;
+}
+
+.login-btn:hover {
+  background: #ea580c !important;
+}
