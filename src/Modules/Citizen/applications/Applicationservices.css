@@ -1,0 +1,234 @@
+.approved-container {
+  padding: 20px;
+}
+
+.page-heading {
+  margin-bottom: 20px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+.approved-list {
+  display: grid;
+  gap: 16px;
+}
+
+.approved-card {
+  background: white;
+  padding: 16px;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  border-left: 5px solid #16a34a;
+}
+
+.status {
+  color: #16a34a;
+  font-weight: 600;
+}
+
+.card-actions {
+  margin-top: 12px;
+  display: flex;
+  gap: 10px;
+}
+
+.download-btn {
+  background: #16a34a;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.view-btn {
+  background: #e2e8f0;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.approved-list {
+  display: grid;
+  gap: 16px;
+  max-height: 70vh;
+  overflow-y: auto;
+}
+.approved-list {
+  display: grid;
+  gap: 16px;
+  max-height: 70vh;
+  overflow-y: auto;
+}
+.search-input {
+  width: 100%;
+  padding: 10px 12px;
+  margin-bottom: 16px;
+  border-radius: 8px;
+  border: 1px solid #cbd5e1;
+  font-size: 14px;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: #16a34a;
+}
+
+.no-results {
+  text-align: center;
+  padding: 20px;
+  color: #ef4444;
+  font-weight: 600;
+}
+/* Status color red for rejected */
+.status.rejected {
+  color: #ef4444; /* Red */
+  font-weight: 600;
+}
+
+/* Apply Again button style */
+.download-btn {
+  background: #ef4444; /* Red */
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.download-btn:hover {
+  opacity: 0.9;
+}
+ 
+/* all servises css  */
+.all-services-container {
+  padding: 20px;
+  background: #f1f5f9;
+  min-height: 80vh;
+}
+
+.page-heading {
+  text-align: center;
+  font-size: 26px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  color: #0f172a;
+}
+
+.filters {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.search-input, .category-dropdown {
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: 1px solid #cbd5e1;
+  font-size: 14px;
+}
+
+.table-wrapper {
+  overflow-x: auto;
+}
+
+.services-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 800px;
+}
+
+.services-table th, .services-table td {
+  border: 1px solid #cbd5e1;
+  padding: 10px;
+  text-align: left;
+}
+
+.services-table th {
+  background: #e2e8f0;
+  font-weight: 600;
+}
+
+.status-chip {
+  padding: 4px 8px;
+  border-radius: 12px;
+  color: white;
+  font-weight: 600;
+  font-size: 12px;
+  text-align: center;
+}
+
+.status-chip.available { background: #16a34a; }
+.status-chip.applied { background: #f59e0b; }
+.status-chip.pending { background: #facc15; color:#0f172a; }
+.status-chip.approved { background: #0ea5e9; }
+.status-chip.rejected { background: #dc2626; }
+
+.apply-btn {
+  padding: 6px 12px;
+  border-radius: 6px;
+  border: none;
+  background: #2563eb;
+  color: white;
+  cursor: pointer;
+  font-size: 13px;
+  transition: 0.2s;
+}
+
+.apply-btn:hover {
+  background: #1d4ed8;
+}
+
+.apply-btn.disabled {
+  background: #94a3b8;
+  cursor: not-allowed;
+}
+/* citizen application css  */
+/* ===== My Applications Cards ===== */
+.applications-cards {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  margin-bottom: 30px;
+  flex-wrap: wrap;
+}
+
+.app-card {
+  flex: 1;
+  min-width: 150px;
+  padding: 20px;
+  border-radius: 10px;
+  color: white;
+  text-align: center;
+  cursor: pointer;
+  transition: 0.3s;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.app-card h4 {
+  margin-bottom: 8px;
+}
+
+.app-card.pending { background: #facc15; color: #1f2937; }
+.app-card.approved { background: #16a34a; }
+.app-card.rejected { background: #dc2626; }
+
+.app-card:hover { transform: translateY(-5px); }
+
+/* ===== See All Services Button ===== */
+.see-all-btn {
+  display: block;
+  margin: 0 auto;
+  padding: 12px 20px;
+  background: #0b3d91;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.3s;
+}
+
+.see-all-btn:hover { background: #0a3575; }

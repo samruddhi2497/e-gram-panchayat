@@ -1,65 +1,117 @@
 import React, { useState } from "react";
-import "../Citizen/Citizen.css"; // Dashboard आणि layout सारखी CSS वापरली
-
-interface ServiceForm {
-  serviceName: string;
-  description: string;
-}
+import { useNavigate } from "react-router-dom";
+import "../Citizen/citizenapplyservices.css";
+import { servicesList, Service } from "../../mockdata/mockdata";
+import { pendingServicesData } from "../../mockdata/mockdata";
 
 const CitizenApplyServices: React.FC = () => {
-  const [form, setForm] = useState<ServiceForm>({
-    serviceName: "",
-    description: "",
-  });
-  const [submitted, setSubmitted] = useState(false);
+  const navigate = useNavigate();
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target;
-    setForm({ ...form, [name]: value });
-  };
+  const [selectedService, setSelectedService] = useState<Service | null>(null);
+  const [applicantName, setApplicantName] = useState("");
+  const [dob, setDob] = useState("");
+  const [address, setAddress] = useState("");
+  const [idProof, setIdProof] = useState<File | null>(null);
+  const [documents, setDocuments] = useState<File[]>([]);
+  const [error, setError] = useState("");
 
+  // Handle form submit
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Service Applied:", form);
-    setSubmitted(true);
-    setForm({ serviceName: "", description: "" });
+
+    // Validation
+    if (!selectedService || !applicantName || !dob || !address || !idProof) {
+      setError("Please fill all required fields and upload ID proof");
+      return;
+    }
+
+    // Mock adding to pendingServicesData
+    const newPendingService = {
+      id: `GRM${Math.floor(Math.random() * 1000)}`,
+      serviceName: selectedService.name,
+      department: selectedService.department,
+      appliedDate: new Date().toLocaleDateString(),
+      stage: "Under Review",
+    };
+
+    pendingServicesData.push(newPendingService); // Mock push
+    alert("Application submitted successfully!");
+
+    // Navigate to Pending Services page
+    navigate("/citizen/pending");
   };
 
   return (
-    <div className="dashboard-container">
-      <h2>📝 Apply for a Service</h2>
-      {submitted && (
-        <div className="success-msg">
-          ✅ Service applied successfully!
-        </div>
-      )}
+    <div className="approved-container">
+      <h2 className="page-heading">Apply New Service</h2>
 
-      <form className="apply-form" onSubmit={handleSubmit}>
-        <label>
-          Service Name
-          <input
-            type="text"
-            name="serviceName"
-            value={form.serviceName}
-            onChange={handleChange}
-            placeholder="Enter service name"
-            required
-          />
-        </label>
+      {error && <p style={{ color: "red" }}>{error}</p>}
 
-        <label>
-          Description
-          <textarea
-            name="description"
-            value={form.description}
-            onChange={handleChange}
-            placeholder="Enter description"
-            rows={4}
-          />
-        </label>
+      <form onSubmit={handleSubmit} className="apply-form">
+        {/* Service Dropdown */}
+        <label>Choose Service:</label>
+        <select
+  value={selectedService?.id || ""}
+  onChange={(e) =>
+    setSelectedService(
+      servicesList.find((s) => s.id === e.target.value) || null
+    )
+  }
+  required
+>
+  <option value="">-- Select Service --</option>
+  {servicesList.map((service) => (
+    <option key={service.id} value={service.id}>
+      {service.name}
+    </option>
+  ))}
+</select>
 
-        <button type="submit" className="primary">
-          Apply
+        {/* Auto-fill Department */}
+        <label>Department:</label>
+        <input type="text" value={selectedService?.department || ""} disabled />
+
+        {/* Applicant Details */}
+        <label>Full Name:</label>
+        <input
+          type="text"
+          value={applicantName}
+          onChange={(e) => setApplicantName(e.target.value)}
+          required
+        />
+
+        <label>Date of Birth:</label>
+        <input
+          type="date"
+          value={dob}
+          onChange={(e) => setDob(e.target.value)}
+          required
+        />
+
+        <label>Address:</label>
+        <textarea
+          value={address}
+          onChange={(e) => setAddress(e.target.value)}
+          required
+        />
+
+        {/* File Uploads */}
+        <label>ID Proof:</label>
+        <input
+          type="file"
+          onChange={(e) => setIdProof(e.target.files ? e.target.files[0] : null)}
+          required
+        />
+
+        <label>Supporting Documents:</label>
+        <input
+          type="file"
+          multiple
+          onChange={(e) => setDocuments(e.target.files ? Array.from(e.target.files) : [])}
+        />
+
+        <button type="submit" className="download-btn">
+          📝 Submit Application
         </button>
       </form>
     </div>

@@ -1,9 +1,15 @@
 import React, { useState } from "react";
 import { Outlet } from "react-router-dom";
 import { NavLink } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+
+import { UserOutlined } from "@ant-design/icons";
+
 import "../../Citizen/Citizen.css";
 
 const CitizenLayout: React.FC = () => {
+  const navigate = useNavigate();
+
   const [collapsed, setCollapsed] = useState(true);
   const [mobileOpen, setMobileOpen] = useState(false);
 
@@ -31,6 +37,12 @@ const CitizenLayout: React.FC = () => {
 </nav>
 
       </aside>
+{mobileOpen && (
+  <div 
+    className="overlay"
+    onClick={() => setMobileOpen(false)}
+  />
+)}
 
       {/* Main Area */}
       <div className="main-area">
@@ -50,6 +62,16 @@ const CitizenLayout: React.FC = () => {
           </button>
 
           <span className="top-title">Citizen Dashboard</span>
+        <div className="topbar-right">
+        <div
+  
+         className="profile-btn"
+        onClick={() => navigate("/citizen/profile")}
+         >
+           <UserOutlined className="profile-icon" />
+  </div>
+</div>
+
         </div>
 
         <div className="page-content">
@@ -57,7 +79,10 @@ const CitizenLayout: React.FC = () => {
         </div>
       </div>
     </div>
+    
   );
+  
 };
+
 
 export default CitizenLayout;

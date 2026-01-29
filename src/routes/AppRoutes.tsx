@@ -16,13 +16,18 @@ import CitizenLayout from "../Modules/Citizen/CitiLayout/CitizenLayout";
 
 // Citizen Pages
 import CitizenDashboard from "../Modules/Citizen/CitizenDashboard";
-import CitizenApprovedServices from "../Modules/Citizen/CitizenApprovedServices";
-import CitizenPendingServices from "../Modules/Citizen/CitizenPendingServices";
-// import CitizenAllServices from "../Modules/Citizen/CitizenAllServices";
-import CitizenApplyServices from "../Modules/Citizen/CitizenApplyServices";
+
+
 import CitizenApplications from "../Modules/Citizen/CitizenApplication";
 import CitizenProfile from "../Modules/Citizen/CitizenProfile";
 import CitizenService from "../Modules/Citizen/CitizenService";
+import ApprovedServices from "../Modules/Citizen/applications/ApprovedServices";
+import RejectedServices from "../Modules/Citizen/applications/RejectedServices";
+import PendingServices from "../Modules/Citizen/applications/PendingServices";
+import ApplyAgain from "../Modules/Citizen/CitiBtnPerform/ApplyAgain";
+import ServiceDetail from "../Modules/Citizen/CitiBtnPerform/ServiceDetail";
+import CitizenApplyServices from "../Modules/Citizen/CitizenApplyServices";
+import AllServices from "../Modules/Citizen/applications/AllServices";
 // import CitizenTaxes from "../Modules/Citizen/CitizenTaxes";
 
 const AppRoutes: React.FC = () => {
@@ -41,13 +46,20 @@ const AppRoutes: React.FC = () => {
       <Route path="/citizen" element={<CitizenLayout/>}>
         <Route index element={<CitizenDashboard />} />
         <Route path="dashboard" element={<CitizenDashboard />} />
-        <Route path="approved" element={<CitizenApprovedServices />} />
-        <Route path="pending" element={<CitizenPendingServices />} />
+        <Route path="approved" element={<ApprovedServices/>} />
+        <Route path="pending" element={<PendingServices/>} />
+        <Route path="rejected" element={<RejectedServices/>} />
+
         {/* <Route path="services" element={<CitizenAllServices/>} /> */}
-        <Route path="services/apply/:id" element={<CitizenApplyServices/>} />
+        <Route path="/citizen/CitizenApplyServices" element={<CitizenApplyServices/>} />
+
         <Route path="applications" element={<CitizenApplications />} />
         <Route path="profile" element={<CitizenProfile />} />
         <Route path="services" element={<CitizenService/>} />
+        <Route path="/citizen/service/:id" element={<ServiceDetail/>} />
+        <Route path="/citizen/service/apply/:id" element={<ApplyAgain/>} />
+        <Route path="/citizen/allservices" element={< AllServices/>} />
+
 
         {/* <Route path="taxes" element={<CitizenTaxes />} /> */}
       </Route>

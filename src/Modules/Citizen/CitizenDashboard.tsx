@@ -1,18 +1,25 @@
 import React from "react";
 import "../Citizen/Citizen.css";
+import { citizen, applications } from "../../mockdata/mockdata";
+import { useNavigate } from "react-router-dom";
+import { PieChart, Pie, Cell, Tooltip, Legend } from "recharts";
 
-import {
-  citizen,
-  applications,
-} from "../../mockdata/mockdata";
-
-// ----------------------------
 const CitizenDashboard: React.FC = () => {
+  const navigate = useNavigate();
+
   const summary = {
     approved: applications.filter(a => a.status === "Approved").length,
     pending: applications.filter(a => a.status === "Pending").length,
     rejected: applications.filter(a => a.status === "Rejected").length,
   };
+
+  const chartData = [
+    { name: "Approved", value: summary.approved },
+    { name: "Pending", value: summary.pending },
+    { name: "Rejected", value: summary.rejected },
+  ];
+
+  const COLORS = ["#16a34a", "#d97706", "#dc2626"];
 
   return (
     <div className="dashboard-container">
@@ -20,36 +27,51 @@ const CitizenDashboard: React.FC = () => {
       <div className="dashboard-header">
         <div>
           <h1>Welcome, {citizen.name} 👋</h1>
-          <p className="quote">
-            Access government services anytime, anywhere
-          </p>
+          <p className="quote">Access government services anytime, anywhere</p>
         </div>
+      </div>
 
-        <div className="profile-box">
-          <img src={citizen.profilePhoto} alt="profile" />
-          <div>
-            <strong>{citizen.name}</strong>
-            <span className="village">{citizen.village}</span>
+      {/* Bigger & Attractive Status Cards */}
+      <div className="status-cards-wrapper">
+        <div className="status-cards">
+          <div className="status-card approved" onClick={() => navigate("/citizen/approved")}>
+            <h4>Approved</h4>
+            <p>{summary.approved}</p>
+          </div>
+
+          <div className="status-card pending" onClick={() => navigate("/citizen/pending")}>
+            <h4>Pending</h4>
+            <p>{summary.pending}</p>
+          </div>
+
+          <div className="status-card rejected" onClick={() => navigate("/citizen/rejected")}>
+            <h4>Rejected</h4>
+            <p>{summary.rejected}</p>
           </div>
         </div>
       </div>
 
-      {/* Status Summary */}
-      <div className="status-cards">
-        <div className="status-card approved">
-          <h4>Approved</h4>
-          <p>{summary.approved}</p>
-        </div>
-
-        <div className="status-card pending">
-          <h4>Pending</h4>
-          <p>{summary.pending}</p>
-        </div>
-
-        <div className="status-card rejected">
-          <h4>Rejected</h4>
-          <p>{summary.rejected}</p>
-        </div>
+      {/* Chart Section */}
+      <div className="chart-section">
+        <h3>Application Status Overview</h3>
+        <PieChart width={350} height={350}>
+          <Pie
+            data={chartData}
+            dataKey="value"
+            nameKey="name"
+            cx="50%"
+            cy="50%"
+            outerRadius={120}
+            label
+            paddingAngle={4}
+          >
+            {chartData.map((entry, index) => (
+              <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+            ))}
+          </Pie>
+          <Tooltip />
+          <Legend verticalAlign="bottom" height={36} />
+        </PieChart>
       </div>
 
       {/* Quick Actions */}
@@ -60,49 +82,7 @@ const CitizenDashboard: React.FC = () => {
         <button>📜 Certificates</button>
       </div>
 
-      {/* Applications */}
-      <div className="applications-section">
-        <div className="section-header">
-          <h2>Recent Applications</h2>
-          <span className="link">View All</span>
-        </div>
-
-        <table className="app-table">
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>Service</th>
-              <th>Date</th>
-              <th>Status</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-
-          <tbody>
-            {applications.map(app => (
-              <tr key={app.id}>
-                <td>{app.id}</td>
-                <td>{app.serviceName}</td>
-                <td>{app.appliedDate}</td>
-                <td>
-                  <span className={`badge ${app.status.toLowerCase()}`}>
-                    {app.status}
-                  </span>
-                </td>
-                <td>
-                  {app.status === "Approved" ? (
-                    <button className="link-btn">Download</button>
-                  ) : (
-                    <button className="link-btn">View</button>
-                  )}
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-
-      {/* Help */}
+      {/* Help Section */}
       <div className="help-section">
         <div className="help-card">❓ How to Apply</div>
         <div className="help-card">📞 Contact Panchayat</div>

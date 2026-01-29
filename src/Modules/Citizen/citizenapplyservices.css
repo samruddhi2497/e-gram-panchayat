@@ -1,0 +1,140 @@
+/* ===== Common Container ===== */
+.approved-container {
+  padding: 20px;
+  background: #f8fafc;
+  align-content: center;
+}
+.page-heading {
+  margin-top: 0px ;
+  margin-bottom: 10px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  font-size: 22px;
+  text-align: center;
+}
+/* Apply Form Wrapper Center */
+.apply-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 500px;
+  width: 100%;
+  border-top: 5px solid #0b3d91;
+  margin: 0 auto;           /* ⭐ THIS centers horizontally */
+  background: white;
+  padding: 24px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+/* ===== Search Input ===== */
+.search-input {
+  width: 100%;
+  max-width: 400px;
+  padding: 10px 12px;
+  margin-bottom: 20px;
+  border-radius: 8px;
+  border: 1px solid #cbd5e1;
+  outline: none;
+}
+
+/* ===== Cards ===== */
+.approved-list {
+  display: grid;
+  gap: 16px;
+  max-height: 70vh;
+  overflow-y: auto;
+}
+
+.approved-card {
+  background: white;
+  padding: 16px;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  border-left: 5px solid #16a34a; /* green for approved, change if needed */
+}
+
+.status {
+  font-weight: 600;
+}
+
+.status.pending {
+  color: #facc15; /* yellow for pending */
+}
+
+.status.rejected {
+  color: #dc2626; /* red for rejected */
+}
+
+/* ===== Card Actions ===== */
+.card-actions {
+  margin-top: 12px;
+  display: flex;
+  gap: 10px;
+}
+
+.download-btn,
+.view-btn {
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  border: none;
+  font-size: 14px;
+  transition: 0.2s;
+}
+
+.download-btn {
+  background: #16a34a;
+  color: white;
+}
+
+.download-btn:hover {
+  background: #15803d;
+}
+
+.view-btn {
+  background: #e2e8f0;
+  color: #0f172a;
+}
+
+.view-btn:hover {
+  background: #cbd5e1;
+}
+
+/* ===== Apply Form ===== */
+.apply-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 500px;
+}
+
+.apply-form label {
+  font-weight: 600;
+}
+
+.apply-form input,
+.apply-form textarea,
+.apply-form select {
+  padding: 10px 12px;
+  border-radius: 6px;
+  border: 1px solid #cbd5e1;
+  outline: none;
+  font-size: 14px;
+}
+
+.apply-form textarea {
+  resize: vertical;
+  min-height: 60px;
+}
+
+.apply-form button {
+  width: fit-content;
+  margin-top: 10px;
+}
+
+.no-results {
+  font-weight: 500;
+  color: #64748b;
+  margin-top: 20px;
+}
