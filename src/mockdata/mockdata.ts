@@ -2,7 +2,7 @@
 // Citizen Module – Mock Data
 // ================================
 
-import AllServices from "../Modules/Citizen/applications/AllServices";
+// import AllServices from "../Modules/Citizen/applications/AllServices";
 
 // Logged-in Citizen
 export const citizen = {
@@ -42,30 +42,38 @@ export const services = [
 ];
 
 // Applications
-export const applications = [
-  {
-    id: 1001,
-    serviceName: "Income Certificate",
-    appliedDate: "12 Jan 2026",
-    status: "Pending",
-    certificate: false,
-  },
-  {
-    id: 1002,
-    serviceName: "Birth Certificate",
-    appliedDate: "05 Jan 2026",
-    status: "Approved",
-    certificate: true,
-  },
-  {
-    id: 1003,
-    serviceName: "Residence Certificate",
-    appliedDate: "01 Jan 2026",
-    status: "Rejected",
-    certificate: false,
-    remark: "Document mismatch",
-  },
-];
+// export const applications = [
+//   {
+//     id: 1001,
+//     serviceName: "Income Certificate",
+//     appliedDate: "12 Jan 2026",
+//     status: "Pending",
+//     certificate: false,
+//   },
+//   {
+//     id: 1002,
+//     serviceName: "Birth Certificate",
+//     appliedDate: "05 Jan 2026",
+//     status: "Approved",
+//     certificate: true,
+//   },
+//   {
+//     id: 1003,
+//     serviceName: "Residence Certificate",
+//     appliedDate: "01 Jan 2026",
+//     status: "Rejected",
+//     certificate: false,
+//     remark: "Document mismatch",
+//   },
+//   {
+//     id: 1004,
+//     serviceName: "bonafite Certificate",
+//     appliedDate: "03 Jan 2026",
+//     status: "Rejected",
+//     certificate: false,
+//     remark: "Document mismatch",
+//   },
+// ];
 export interface ApprovedService {
   id: string;
   serviceName: string;

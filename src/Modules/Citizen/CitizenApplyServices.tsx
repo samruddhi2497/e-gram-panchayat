@@ -1,13 +1,17 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../Citizen/citizenapplyservices.css";
-import { servicesList, Service } from "../../mockdata/mockdata";
+// import { servicesList, Service, } from "../../mockdata/mockdata";
+import { AllServicesList, AllService } from "../../mockdata/mockdata";
+
 import { pendingServicesData } from "../../mockdata/mockdata";
 
 const CitizenApplyServices: React.FC = () => {
   const navigate = useNavigate();
 
-  const [selectedService, setSelectedService] = useState<Service | null>(null);
+  // const [selectedService, setSelectedService] = useState<Service | null>(null);
+  const [selectedService, setSelectedService] = useState<AllService | null>(null);
+
   const [applicantName, setApplicantName] = useState("");
   const [dob, setDob] = useState("");
   const [address, setAddress] = useState("");
@@ -16,30 +20,27 @@ const CitizenApplyServices: React.FC = () => {
   const [error, setError] = useState("");
 
   // Handle form submit
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
+const handleSubmit = (e: React.FormEvent) => {
+  e.preventDefault();
 
-    // Validation
-    if (!selectedService || !applicantName || !dob || !address || !idProof) {
-      setError("Please fill all required fields and upload ID proof");
-      return;
-    }
+  if (!selectedService || !applicantName || !dob || !address || !idProof) {
+    setError("Please fill all required fields and upload ID proof");
+    return;
+  }
 
-    // Mock adding to pendingServicesData
-    const newPendingService = {
-      id: `GRM${Math.floor(Math.random() * 1000)}`,
-      serviceName: selectedService.name,
-      department: selectedService.department,
-      appliedDate: new Date().toLocaleDateString(),
-      stage: "Under Review",
-    };
+  // 🔥 Find service in AllServicesList
+  const serviceIndex = AllServicesList.findIndex(
+    (s) => s.id === selectedService.id
+  );
 
-    pendingServicesData.push(newPendingService); // Mock push
-    alert("Application submitted successfully!");
+  if (serviceIndex !== -1) {
+    AllServicesList[serviceIndex].status = "Pending";
+    AllServicesList[serviceIndex].appliedDate = new Date().toLocaleDateString();
+  }
 
-    // Navigate to Pending Services page
-    navigate("/citizen/pending");
-  };
+  alert("Application submitted successfully!");
+  navigate("/citizen/pending");
+};
 
   return (
     <div className="approved-container">
@@ -50,21 +51,26 @@ const CitizenApplyServices: React.FC = () => {
       <form onSubmit={handleSubmit} className="apply-form">
         {/* Service Dropdown */}
         <label>Choose Service:</label>
-        <select
+<select
   value={selectedService?.id || ""}
   onChange={(e) =>
     setSelectedService(
-      servicesList.find((s) => s.id === e.target.value) || null
+      AllServicesList.find((s) => s.id === e.target.value) || null
     )
   }
   required
 >
   <option value="">-- Select Service --</option>
-  {servicesList.map((service) => (
-    <option key={service.id} value={service.id}>
-      {service.name}
-    </option>
-  ))}
+  {AllServicesList.map((service) => (
+  <option
+    key={service.id}
+    value={service.id}
+    disabled={service.status === "Approved" || service.status === "Pending"}
+  >
+    {service.name} ({service.status})
+  </option>
+))}
+
 </select>
 
         {/* Auto-fill Department */}

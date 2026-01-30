@@ -98,7 +98,7 @@
 
 /* ===== Dashboard ===== */
 .dashboard-container { background:var(--bg); padding:24px; font-family:"Segoe UI",sans-serif; min-height:calc(100vh-60px); width:100%; max-width:1200px; margin:auto; }
-.dashboard-header { display:flex; justify-content:center; align-items:center; }
+.dashboard-header { display:flex; }
 .dashboard-header h1 { font-size:26px; }
 .quote { color:#475569; margin-top:4px; }
 .profile-box { display:flex; align-items:center; gap:10px; }
@@ -106,63 +106,74 @@
 .village { font-size:12px; color:var(--text-muted); }
 
 /* Status Cards */
-/* Cards Wrapper */
+
 .status-cards-wrapper {
+  margin: 30px 0;
   display: flex;
-  flex-direction: column;
-  gap: 2px;
-  margin: 25px 0;
+  justify-content: center;
 }
 
 .status-cards {
   display: flex;
-  gap: 20px;
+  gap: 24px;
   flex-wrap: wrap;
 }
 
-/* Bigger & Gradient Cards */
-.status-cards-wrapper{
-  align-items: center;
-  /* justify-content: center; */
-}
+/* Government Professional Card */
 .status-card {
-  min-width: 140px;
-  background: linear-gradient(135deg, #2563eb, #1e40af);
-  padding: 10px 130px;
-  border-radius: 16px;
-  color: white;
-  text-align: center;
+  width: 230px;
+  height: 130px;
+  background: #ffffff;
+  border: 1px solid #d1d5db;
+  border-top: 4px solid #0b3d91; /* top accent instead of side */
+  border-radius: 6px;
+  padding: 18px;
+  text-align: center; /* CENTER ALIGN */
+  box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+  cursor: pointer;
+  transition: all 0.25s ease;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  cursor: pointer;
-  transition: transform 0.3s, box-shadow 0.3s;
 }
 
-.status-card.approved {
-  background: linear-gradient(135deg, #16a34a, #22c55e);
-}
-.status-card.pending {
-  background: linear-gradient(135deg, #d97706, #f59e0b);
-}
-.status-card.rejected {
-  background: linear-gradient(135deg, #dc2626, #ef4444);
-}
-
+/* Hover Effect — subtle govt style */
 .status-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 16px 30px rgba(0,0,0,0.2);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+  transform: translateY(-3px);
+  border-color: #0b3d91;
 }
 
+/* Title */
 .status-card h4 {
-  font-size: 20px;
+  font-size: 15px;
+  color: #374151;
   margin: 0;
+  font-weight: 600;
+  letter-spacing: 0.3px;
 }
+
+/* Number */
 .status-card p {
   font-size: 30px;
-  font-weight: bold;
+  font-weight: 700;
   margin-top: 8px;
+  color: #0b3d91;
 }
+
+/* Status Accent Colors */
+.status-card.approved {
+  border-top-color: #2e7d32;
+}
+
+.status-card.pending {
+  border-top-color: #f59e0b;
+}
+
+.status-card.rejected {
+  border-top-color: #c62828;
+}
+
 /* Chart Section */
 .chart-section {
   margin-top: 20px;

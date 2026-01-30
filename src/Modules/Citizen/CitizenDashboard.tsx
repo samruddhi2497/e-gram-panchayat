@@ -1,23 +1,24 @@
 import React from "react";
 import "../Citizen/Citizen.css";
-import { citizen, applications } from "../../mockdata/mockdata";
+import { citizen, AllServicesList, approvedServicesData, pendingServicesData, rejectedServicesData} from "../../mockdata/mockdata";
 import { useNavigate } from "react-router-dom";
 import { PieChart, Pie, Cell, Tooltip, Legend } from "recharts";
 
 const CitizenDashboard: React.FC = () => {
   const navigate = useNavigate();
 
-  const summary = {
-    approved: applications.filter(a => a.status === "Approved").length,
-    pending: applications.filter(a => a.status === "Pending").length,
-    rejected: applications.filter(a => a.status === "Rejected").length,
-  };
-
-  const chartData = [
-    { name: "Approved", value: summary.approved },
-    { name: "Pending", value: summary.pending },
-    { name: "Rejected", value: summary.rejected },
-  ];
+const summary = {
+  approved: approvedServicesData.length,
+  pending: pendingServicesData.length,
+  rejected: rejectedServicesData.length,
+  all_services: AllServicesList.length,
+};
+const chartData = [
+  { name: "Approved", value: summary.approved },
+  { name: "Pending", value: summary.pending },
+  { name: "Rejected", value: summary.rejected },
+  { name: "All Services", value: summary.all_services },
+];
 
   const COLORS = ["#16a34a", "#d97706", "#dc2626"];
 
@@ -32,7 +33,7 @@ const CitizenDashboard: React.FC = () => {
       </div>
 
       {/* Bigger & Attractive Status Cards */}
-      <div className="status-cards-wrapper">
+      {/* <div className="status-cards-wrapper">
         <div className="status-cards">
           <div className="status-card approved" onClick={() => navigate("/citizen/approved")}>
             <h4>Approved</h4>
@@ -49,8 +50,42 @@ const CitizenDashboard: React.FC = () => {
             <p>{summary.rejected}</p>
           </div>
         </div>
-      </div>
+      </div> */}
+     <div className="status-cards-wrapper">
+      <div className="status-cards">
 
+        <div
+          className="status-card approved"
+          onClick={() => navigate("/citizen/approved")}
+        >
+          <h4>Approved Applications</h4>
+          <p>{summary.approved}</p>
+        </div>
+
+        <div
+          className="status-card pending"
+          onClick={() => navigate("/citizen/pending")}
+        >
+          <h4>Pending Applications</h4>
+          <p>{summary.pending}</p>
+        </div>
+
+        <div
+          className="status-card rejected"
+          onClick={() => navigate("/citizen/rejected")}
+        >
+          <h4>Rejected Applications</h4>
+          <p>{summary.rejected}</p>
+        </div>
+        <div
+          className="status-card all_services"
+          onClick={() => navigate("/citizen/allservices")}
+        >
+          <h4>All service</h4>
+          <p>{summary.all_services}</p>
+        </div>
+      </div>
+    </div>
       {/* Chart Section */}
       <div className="chart-section">
         <h3>Application Status Overview</h3>
@@ -93,3 +128,8 @@ const CitizenDashboard: React.FC = () => {
 };
 
 export default CitizenDashboard;
+
+
+
+// remove navbar 
+// color of cards 

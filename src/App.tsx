@@ -1,41 +1,46 @@
-// import React from 'react';
-// import logo from './logo.svg';
-// import './App.css';
+// import { BrowserRouter } from "react-router-dom";
+// import Navbar from "./components/Navbar";
+// import Footer from "./components/AppFooter";
+// import AppRoutes from "./routes/AppRoutes";
+
 
 // function App() {
 //   return (
-//     <div className="App">
-//       <header className="App-header">
-//         <img src={logo} className="App-logo" alt="logo" />
-//         <p>
-//           Edit <code>src/App.tsx</code> and save to reload.
-//         </p>
-//         <a
-//           className="App-link"
-//           href="https://reactjs.org"
-//           target="_blank"
-//           rel="noopener noreferrer"
-//         >
-//           Learn React
-//         </a>
-//       </header>
-//     </div>
+//     <BrowserRouter>
+//       <Navbar />      
+//       <AppRoutes />
+//       <Footer />
+//     </BrowserRouter>
 //   );
 // }
 
 // export default App;
-import { BrowserRouter } from "react-router-dom";
+import { BrowserRouter, useLocation } from "react-router-dom";
+import AppRoutes from "./routes/AppRoutes";
 import Navbar from "./components/Navbar";
 import Footer from "./components/AppFooter";
-import AppRoutes from "./routes/AppRoutes";
 
+function LayoutWrapper() {
+  const location = useLocation();
+
+  // Show only on Welcome page
+  const showHeaderFooter = location.pathname === "/";
+
+  return (
+    <>
+      {showHeaderFooter && <Navbar />}
+      
+      <AppRoutes />
+
+      {showHeaderFooter && <Footer />}
+    </>
+  );
+}
 
 function App() {
   return (
     <BrowserRouter>
-      <Navbar />      {/*THIS LINE IS KEY */}
-      <AppRoutes />
-      <Footer />
+      <LayoutWrapper />
     </BrowserRouter>
   );
 }
