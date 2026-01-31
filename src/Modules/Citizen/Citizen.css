@@ -198,6 +198,32 @@
   .status-cards { flex-direction: column; }
   .chart-section { margin-top: 20px; }
 }
+.profile-summary{
+  margin-top:8px;
+  font-size:14px;
+  color:#475569;
+}
+.notice-banner{
+  background:#fef3c7;
+  color:#92400e;
+  padding:10px 16px;
+  border-radius:8px;
+  margin:15px 0;
+  font-size:14px;
+}
+.doc-warning{
+  background:#fff7ed;
+  color:#9a3412;
+  padding:8px 12px;
+  border-radius:6px;
+  margin-top:6px;
+  font-size:13px;
+}
+
+@media(max-width:768px){
+  .status-card{ width:100%; }
+  .help-section{ grid-template-columns:1fr; }
+}
 
 /* Applications Table */
 .applications-section { background:white; padding:20px; border-radius:16px; box-shadow:0 8px 20px rgba(0,0,0,0.05); overflow-x:auto; }

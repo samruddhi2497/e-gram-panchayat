@@ -3,9 +3,16 @@ import "../Citizen/Citizen.css";
 import { citizen, AllServicesList, approvedServicesData, pendingServicesData, rejectedServicesData} from "../../mockdata/mockdata";
 import { useNavigate } from "react-router-dom";
 import { PieChart, Pie, Cell, Tooltip, Legend } from "recharts";
+// import { BarChart, Bar, XAxis, YAxis, CartesianGrid } from "recharts";
 
 const CitizenDashboard: React.FC = () => {
   const navigate = useNavigate();
+
+const hour = new Date().getHours();
+const greeting =
+  hour < 12 ? "Good Morning" :
+  hour < 18 ? "Good Afternoon" :
+  "Good Evening";
 
 const summary = {
   approved: approvedServicesData.length,
@@ -13,6 +20,10 @@ const summary = {
   rejected: rejectedServicesData.length,
   all_services: AllServicesList.length,
 };
+const applicationsNeedingDocs = pendingServicesData.filter(
+  app => app.stage === "Waiting for Documents"
+);
+
 const chartData = [
   { name: "Approved", value: summary.approved },
   { name: "Pending", value: summary.pending },
@@ -20,37 +31,30 @@ const chartData = [
   { name: "All Services", value: summary.all_services },
 ];
 
-  const COLORS = ["#16a34a", "#d97706", "#dc2626"];
+  // const COLORS = ["#16a34a", "#d97706", "#dc2626"];
+  const COLORS = ["#16a34a", "#d97706", "#dc2626", "#2563eb"];
+
 
   return (
     <div className="dashboard-container">
       {/* Header */}
       <div className="dashboard-header">
         <div>
-          <h1>Welcome, {citizen.name} 👋</h1>
+          {/* <h1>Welcome, {citizen.name} 👋</h1> */}
+          <h1>{greeting}, {citizen.name} 👋</h1>
+
           <p className="quote">Access government services anytime, anywhere</p>
+        
+
         </div>
       </div>
-
-      {/* Bigger & Attractive Status Cards */}
-      {/* <div className="status-cards-wrapper">
-        <div className="status-cards">
-          <div className="status-card approved" onClick={() => navigate("/citizen/approved")}>
-            <h4>Approved</h4>
-            <p>{summary.approved}</p>
-          </div>
-
-          <div className="status-card pending" onClick={() => navigate("/citizen/pending")}>
-            <h4>Pending</h4>
-            <p>{summary.pending}</p>
-          </div>
-
-          <div className="status-card rejected" onClick={() => navigate("/citizen/rejected")}>
-            <h4>Rejected</h4>
-            <p>{summary.rejected}</p>
-          </div>
-        </div>
-      </div> */}
+      {/*dashboard-header END */}
+{applicationsNeedingDocs.length > 0 && (
+  <div className="notice-banner">
+    ⚠️ {applicationsNeedingDocs.length} {applicationsNeedingDocs.length === 1 ? "application is" : "applications are"} waiting for documents
+  </div>
+)}
+{/* card approve reject all pending  */}
      <div className="status-cards-wrapper">
       <div className="status-cards">
 
@@ -108,13 +112,15 @@ const chartData = [
           <Legend verticalAlign="bottom" height={36} />
         </PieChart>
       </div>
-
+     {/* bar section  */}
+     
       {/* Quick Actions */}
       <div className="quick-actions">
-        <button className="primary">📝 Apply Service</button>
-        <button>📂 My Applications</button>
-        <button>📍 Track Status</button>
-        <button>📜 Certificates</button>
+        <button className="primary" onClick={() => navigate("/citizen/services")}>📝 Apply Service</button>
+<button onClick={() => navigate("/citizen/applications")}>📂 My Applications</button>
+<button onClick={() => navigate("/citizen/track")}>📍 Track Status</button>
+<button onClick={() => navigate("/citizen/certificates")}>📜 Certificates</button>
+
       </div>
 
       {/* Help Section */}

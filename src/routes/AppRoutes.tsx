@@ -28,7 +28,9 @@ import ApplyAgain from "../Modules/Citizen/CitiBtnPerform/ApplyAgain";
 import ServiceDetail from "../Modules/Citizen/CitiBtnPerform/ServiceDetail";
 import CitizenApplyServices from "../Modules/Citizen/CitizenApplyServices";
 import AllServices from "../Modules/Citizen/applications/AllServices";
-// import CitizenTaxes from "../Modules/Citizen/CitizenTaxes";
+import StaffLayout from "../Modules/Staff/StaffLayout";
+import StaffAllApplications from "../Modules/Staff/StaffAllApplications";
+import StaffAllComplaints from "../Modules/Staff/StaffAllComplaints";
 
 const AppRoutes: React.FC = () => {
   return (
@@ -40,7 +42,16 @@ const AppRoutes: React.FC = () => {
 
       {/* Dashboards */}
       <Route path="/admin" element={<AdminDashboard />} />
-      <Route path="/staff" element={<StaffDashboard />} />
+      
+      {/* staff nested routing  */}
+      <Route path="/staff" element={<StaffLayout />}>
+    <Route index element={<StaffDashboard />} />       
+    <Route path="dashboard" element={<StaffDashboard />} />
+      <Route path="/staff/applications" element={<StaffAllApplications/>} />
+    <Route path="/staff/complaints" element={<StaffAllComplaints/>} />
+
+  
+  </Route>
 
       {/* Citizen Nested Routes */}
       <Route path="/citizen" element={<CitizenLayout/>}>
@@ -63,7 +74,7 @@ const AppRoutes: React.FC = () => {
 
         {/* <Route path="taxes" element={<CitizenTaxes />} /> */}
       </Route>
-
+       
       {/* Extra */}
       <Route path="/navbar" element={<Navbar />} />
 
